@@ -8,7 +8,7 @@ import {
 import { AnyAction } from 'redux';
 // import * as interfaces from '../'
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   posts: [],
   loading: true,
   errorMessage: null,

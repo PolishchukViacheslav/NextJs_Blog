@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 import { setLoading, fetchDataFulfilled, fetchDataRejected } from './reducer';
 import { GET_URL } from '../API/config';
 import axios from 'axios';
 import { Dispatch } from 'react';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export const getPosts = () => {
   return async (dispatch: Dispatch<AnyAction>): Promise<void> => {
@@ -18,4 +19,10 @@ export const getPosts = () => {
   };
 };
 
-export const store = createStore(reducer, applyMiddleware(thunk));
+// const initialState = {};
+
+export const store = createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(thunk))
+);

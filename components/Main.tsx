@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Post } from '../interfaces';
+import { Post, InitialState } from '../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../redux/store';
+import Link from 'next/link';
+// import styled from 'styled-components';
 
 export const Main: FC = () => {
   // const [posts, setPosts] = useState<Post[]>([]);
@@ -14,17 +16,26 @@ export const Main: FC = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
-  const articles = useSelector((state) => ({
-    posts: state.posts,
-    loading: state.loading,
-  }));
+  const articles = useSelector((state: InitialState) => state.posts);
+  console.log(articles);
 
   return (
     <>
+      {/* <h1>sdfb</h1> */}
       {articles.map((post) => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
+          <Link
+            href={{
+              pathname: '/posts/[id]',
+              query: {
+                title: post.title,
+                body: post.body,
+              },
+            }}
+            as={`/posts/:${post.id}`}
+          >
+            <a>{post.title}</a>
+          </Link>
         </div>
       ))}
     </>
