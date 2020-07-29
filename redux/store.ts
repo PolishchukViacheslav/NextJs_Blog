@@ -19,8 +19,6 @@ export const getPosts = () => {
   };
 };
 
-// const initialState = {};
-
 export const store = createStore(
   reducer,
   initialState,

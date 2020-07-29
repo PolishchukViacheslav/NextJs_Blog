@@ -3,8 +3,13 @@ export interface SetLoadingAction {
   payload: boolean;
 }
 
+export interface SetPost {
+  type: string;
+  payload: Post;
+}
+
 export interface Post {
-  id: number;
+  id: number | string;
   title: string;
   body: string;
 }
@@ -26,5 +31,3 @@ export interface InitialState {
   loading: boolean;
   errorMessage: null | string;
 }
-
-// interface Action extends

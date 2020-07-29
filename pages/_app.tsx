@@ -5,12 +5,6 @@ import { store } from '../redux/store';
 import { createWrapper } from 'next-redux-wrapper';
 
 class MyApp extends App {
-  // static async getInitialProps({ Component, ctx }) {
-  //   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
-
-  //Anything returned here can be accessed by the client
-  //   return { pageProps: pageProps };
-  // }
   render() {
     const { Component, pageProps } = this.props;
 
