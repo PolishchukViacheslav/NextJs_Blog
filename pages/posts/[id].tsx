@@ -1,19 +1,27 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import React, { FC } from 'react';
+import { GetServerSideProps } from 'next';
+import { Layout } from '../../API/Layout';
+import { Post } from '../../interfaces';
+import { POST_URL } from '../../API/config';
+import axios from 'axios';
 
-export default function PostWithID(): JSX.Element {
-  const { query } = useRouter();
-  return (
-    <>
-      <Link href="/">
-        <a>Blog</a>
-      </Link>{' '}
-      <Link href="/posts/new">
-        <a>Create new post</a>
-      </Link>
-      <h1>{query.title}</h1>
-      <article>{query.body}</article>
-    </>
-  );
+interface PostWithIdProps {
+  post: Post;
 }
+
+const PostWithID: FC<PostWithIdProps> = ({ post }) => {
+  return (
+    <Layout>
+      <h1>{post.title}</h1>
+      <article>{post.body}</article>
+    </Layout>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ query: { id } }) => {
+  const { data } = await axios.get(POST_URL + '/' + id);
+  const post = data;
+  return { props: { post } };
+};
+
+export default PostWithID;

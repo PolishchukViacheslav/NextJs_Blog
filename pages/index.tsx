@@ -6,7 +6,28 @@ import { Post } from '../interfaces';
 import { useDispatch } from 'react-redux';
 import { getPosts } from '../redux/store';
 import Link from 'next/link';
-import { GET_URL } from '../API/config';
+import { POST_URL } from '../API/config';
+import { Layout } from '../API/Layout';
+
+import styled from 'styled-components';
+
+const Ul = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 25px;
+  list-style: none;
+`;
+
+const Li = styled.li`
+  padding: 10px;
+  margin: 10px;
+  width: max-content;
+  cursor: pointer;
+  border-radius: 25px;
+  background-color: #5963ec;
+  color: #fff;
+`;
 
 interface HomeProps {
   posts: Post[];
@@ -19,16 +40,11 @@ const Home: FC<HomeProps> = ({ posts }) => {
   }, [dispatch]);
 
   return (
-    <>
-      <Link href="/">
-        <a>Blog</a>
-      </Link>{' '}
-      <Link href="/posts/new">
-        <a>Create new post</a>
-      </Link>
-      {posts.map((post) => (
-        <div key={post.id}>
+    <Layout>
+      <Ul>
+        {posts.map((post) => (
           <Link
+            key={post.id}
             href={{
               pathname: '/posts/[id]',
               query: {
@@ -37,18 +53,18 @@ const Home: FC<HomeProps> = ({ posts }) => {
                 idi: post.id,
               },
             }}
-            as={`/posts/:${post.id}`}
+            as={`/posts/${post.id}`}
           >
-            <a>{post.title}</a>
+            <Li>{post.title}</Li>
           </Link>
-        </div>
-      ))}
-    </>
+        ))}
+      </Ul>
+    </Layout>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async (ctx) => {
-  const { data } = await axios.get(GET_URL);
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const { data } = await axios.get(POST_URL);
   const posts = data;
   return { props: { posts } };
 };

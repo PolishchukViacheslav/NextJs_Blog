@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { setPost } from '../../redux/reducer';
 import { POST_URL } from '../../API/config';
+import { Layout } from '../../API/Layout';
 
 const NewPost: FC = () => {
   const [title, addTitle] = useState<string>('');
@@ -32,10 +33,10 @@ const NewPost: FC = () => {
     axios
       .post(POST_URL, post)
       .then((res) => {
-        console.log(res);
+        `Result : ${res}`;
       })
       .catch((err) => {
-        console.log(err);
+        `Error: ${err}`;
       });
 
     addTitle('');
@@ -44,13 +45,7 @@ const NewPost: FC = () => {
     return;
   };
   return (
-    <>
-      <Link href="/">
-        <a>Blog</a>
-      </Link>{' '}
-      <Link href="/new">
-        <a>Create new post</a>
-      </Link>
+    <Layout>
       <form onSubmit={handleSubmit}>
         {isEmpty && <span>Enter some data</span>}
         <div>
@@ -74,7 +69,7 @@ const NewPost: FC = () => {
         </div>
         <button type="submit">Add Post</button>
       </form>
-    </>
+    </Layout>
   );
 };
 
