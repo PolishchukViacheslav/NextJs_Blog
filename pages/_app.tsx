@@ -17,5 +17,5 @@ class MyApp extends App {
 }
 
 const makeStore = () => store;
-const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper(makeStore);
 export default wrapper.withRedux(MyApp);
