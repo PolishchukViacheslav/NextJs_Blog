@@ -2,14 +2,13 @@ import React, { FC } from 'react';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import { Post } from '../interfaces';
 import { useDispatch } from 'react-redux';
 import { getPosts } from '../redux/store';
 import Link from 'next/link';
 import { POST_URL } from '../API/config';
 import { Layout } from '../API/Layout';
-
-import styled from 'styled-components';
 
 const Ul = styled.ul`
   display: flex;
@@ -34,6 +33,9 @@ interface HomeProps {
 }
 
 const Home: FC<HomeProps> = ({ posts }) => {
+  // const [posts, setPosts] = useState([]);
+  // const posts = useSelector((state: InitialState) => state.posts);
+  // console.log(posts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts());

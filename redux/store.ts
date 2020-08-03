@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
-import reducer, { initialState } from './reducer';
+import reducer from './reducer';
 import { setLoading, fetchDataFulfilled, fetchDataRejected } from './reducer';
 import { POST_URL } from '../API/config';
 import axios from 'axios';
@@ -19,8 +19,4 @@ export const getPosts = () => {
   };
 };
 
-export const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+export const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
