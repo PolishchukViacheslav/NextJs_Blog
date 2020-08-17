@@ -1,21 +1,22 @@
-import App from 'next/app';
-import { Provider } from 'react-redux';
+import App, { AppInitialProps, AppContext } from 'next/app';
 import React from 'react';
-import { store } from '../redux/store';
-import { createWrapper } from 'next-redux-wrapper';
+import { wrapper } from '../redux/store';
 
-class MyApp extends App {
+class HomeApp extends App<AppInitialProps> {
+  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
+    return {
+      pageProps: {
+        ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+        appProp: ctx.pathname,
+      },
+    };
+  };
+
   render() {
     const { Component, pageProps } = this.props;
 
-    return (
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    );
+    return <Component {...pageProps} />;
   }
 }
 
-const makeStore = () => store;
-export const wrapper = createWrapper(makeStore);
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(HomeApp);

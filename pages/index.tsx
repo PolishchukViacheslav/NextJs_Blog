@@ -3,12 +3,13 @@ import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Post } from '../interfaces';
-import { useDispatch } from 'react-redux';
-import { getPosts } from '../redux/store';
+import { Post, State } from '../interfaces';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { POST_URL } from '../API/config';
 import { Layout } from '../API/Layout';
+import { setPosts } from '../redux/reducer';
+import { wrapper } from '../redux/store';
 
 const Ul = styled.ul`
   display: flex;
@@ -28,18 +29,9 @@ const Li = styled.li`
   color: #fff;
 `;
 
-interface HomeProps {
-  posts: Post[];
-}
-
-const Home: FC<HomeProps> = ({ posts }) => {
-  // const [posts, setPosts] = useState([]);
-  // const posts = useSelector((state: InitialState) => state.posts);
-  // console.log(posts);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
+const Home: FC = () => {
+  const { posts } = useSelector<State, State>((state) => state);
+  console.log(posts);
 
   return (
     <Layout>
@@ -65,10 +57,13 @@ const Home: FC<HomeProps> = ({ posts }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const { data } = await axios.get(POST_URL);
-  const posts = data;
-  return { props: { posts } };
-};
+// eslint-disable-next-line
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
+  const { data } = await axios.get<Post[]>(POST_URL);
+
+  store.dispatch(setPosts(data));
+
+  return { props: {} };
+});
 
 export default Home;

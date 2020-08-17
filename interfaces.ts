@@ -1,33 +1,18 @@
-export interface SetLoadingAction {
+export interface SetPosts {
   type: string;
-  payload: boolean;
-}
-
-export interface SetPost {
-  type: string;
-  payload: Post;
+  payload: Post[];
 }
 
 export interface Post {
-  id: number | string;
+  id: number;
+  userId: number;
   title: string;
   body: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface FetchDataFulfilled {
-  type: string;
-  payload: Post[];
-  loading: boolean;
-}
-
-export interface FetchDataRejected {
-  type: string;
-  payload: string;
-  loading: boolean;
-}
-
-export interface InitialState {
+export interface State {
   posts: Post[];
-  loading: boolean;
   errorMessage: null | string;
 }

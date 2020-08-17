@@ -1,22 +1,11 @@
-import { createStore, applyMiddleware, AnyAction } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducer';
-import { setLoading, fetchDataFulfilled, fetchDataRejected } from './reducer';
-import { POST_URL } from '../API/config';
-import axios from 'axios';
-import { Dispatch } from 'react';
+import { reducer } from './reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { MakeStore, createWrapper, Context } from 'next-redux-wrapper';
+import { State } from '../interfaces';
 
-export const getPosts = () => {
-  return async (dispatch: Dispatch<AnyAction>): Promise<void> => {
-    try {
-      dispatch(setLoading(true));
-      const { data } = await axios.get(POST_URL);
-      dispatch(fetchDataFulfilled(data));
-    } catch (error) {
-      dispatch(fetchDataRejected(error));
-    }
-  };
-};
+export const makeStore: MakeStore<State> = (context: Context) =>
+  createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
-export const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+export const wrapper = createWrapper<State>(makeStore);
