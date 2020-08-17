@@ -31,7 +31,6 @@ const Li = styled.li`
 
 const Home: FC = () => {
   const { posts } = useSelector<State, State>((state) => state);
-  console.log(posts);
 
   return (
     <Layout>
