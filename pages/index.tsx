@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
-import { GetServerSideProps } from 'next';
+import React from 'react';
+import { NextPage } from 'next';
 import axios from 'axios';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Post, State } from '../interfaces';
+import { Post, State } from '../src/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { POST_URL } from '../API/config';
-import { Layout } from '../API/Layout';
-import { setPosts } from '../redux/reducer';
-import { wrapper } from '../redux/store';
+import { POST_URL } from '../src/API/config';
+import { Layout } from '../src/API/Layout';
+import { setPosts } from '../src/redux/reducer';
+import { wrapper } from '../src/redux/store';
 
 const Ul = styled.ul`
   display: flex;
@@ -29,9 +29,9 @@ const Li = styled.li`
   color: #fff;
 `;
 
-const Home: FC = () => {
+const Home: NextPage = () => {
   const { posts } = useSelector<State, State>((state) => state);
-
+  console.log(posts);
   return (
     <Layout>
       <Ul>
@@ -56,7 +56,6 @@ const Home: FC = () => {
   );
 };
 
-// eslint-disable-next-line
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
   const { data } = await axios.get<Post[]>(POST_URL);
 

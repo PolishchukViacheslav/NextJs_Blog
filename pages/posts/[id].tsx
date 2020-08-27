@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { GetServerSideProps } from 'next';
-import { Layout } from '../../API/Layout';
-import { Post } from '../../interfaces';
-import { POST_URL } from '../../API/config';
+import { Layout } from '../../src/API/Layout';
+import { Post } from '../../src/interfaces';
+import { POST_URL } from '../../src/API/config';
 import axios from 'axios';
 
 interface PostWithIdProps {

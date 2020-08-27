@@ -3,9 +3,9 @@ import { v4 as idGenerator } from 'uuid';
 import axios from 'axios';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-import { setPost } from '../../redux/reducer';
-import { POST_URL } from '../../API/config';
-import { Layout } from '../../API/Layout';
+import { setPost } from '../../src/redux/reducer';
+import { POST_URL } from '../../src/API/config';
+import { Layout } from '../../src/API/Layout';
 
 const NewPost: FC = () => {
   const [title, addTitle] = useState<string>('');

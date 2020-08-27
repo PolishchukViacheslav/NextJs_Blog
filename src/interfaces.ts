@@ -1,15 +1,15 @@
 export interface SetPosts {
   type: string;
-  payload: Post[];
+  payload: Post[] | Post;
 }
 
 export interface Post {
-  id: number;
-  userId: number;
+  id: number | string;
+  userId?: number;
   title: string;
   body: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface State {

@@ -9,7 +9,7 @@ export const initialState: State = {
 
 const SET_POSTS = 'SET_POSTS';
 
-export const setPosts = (post: Post[]): SetPosts => ({
+export const setPosts = (post: Post[] | Post): SetPosts => ({
   type: SET_POSTS,
   payload: post,
 });
