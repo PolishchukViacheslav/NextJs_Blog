@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { v4 as idGenerator } from 'uuid';
 import axios from 'axios';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { setPosts } from '../../src/redux/reducer';
 import { POST_URL } from '../../src/API/config';

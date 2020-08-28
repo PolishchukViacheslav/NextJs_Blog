@@ -1,10 +1,9 @@
 import React from 'react';
 import { NextPage } from 'next';
 import axios from 'axios';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Post, State } from '../src/interfaces';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { POST_URL } from '../src/API/config';
 import { Layout } from '../src/API/Layout';
