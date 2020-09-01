@@ -9,7 +9,6 @@ import { POST_URL } from '../src/API/config';
 import { Layout } from '../src/components/Layout';
 import { setPosts } from '../src/redux/reducer';
 import { wrapper } from '../src/redux/store';
-import { GlobalStyle } from '../src/components/styles';
 
 const Ul = styled.ul`
   display: flex;
