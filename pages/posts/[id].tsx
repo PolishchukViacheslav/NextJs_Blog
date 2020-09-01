@@ -4,6 +4,7 @@ import { Layout } from '../../src/components/Layout';
 import { Post } from '../../src/interfaces';
 import { POST_URL } from '../../src/API/config';
 import axios from 'axios';
+import { PostWrapper } from '../../src/components/styles';
 
 interface PostWithIdProps {
   post: Post;
@@ -12,8 +13,10 @@ interface PostWithIdProps {
 const PostWithID: FC<PostWithIdProps> = ({ post }) => {
   return (
     <Layout>
-      <h1>{post.title}</h1>
-      <article>{post.body}</article>
+      <PostWrapper>
+        <h1>{post.title}</h1>
+        <article>{post.body}</article>
+      </PostWrapper>
     </Layout>
   );
 };

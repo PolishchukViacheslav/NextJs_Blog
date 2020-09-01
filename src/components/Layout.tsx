@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Wrapper, Button, GlobalStyle } from './styles';
+import { HeaderWrapper, Button, GlobalStyle, MainContainer } from './styles';
 
 export const Layout: FC = ({ children }) => (
-  <>
-    <Wrapper>
+  <MainContainer>
+    <HeaderWrapper>
       <Link href="/">
         <Button>Blog</Button>
       </Link>{' '}
       <Link href="/posts/new">
         <Button>Create new post</Button>
       </Link>
-    </Wrapper>
+    </HeaderWrapper>
     {children}
     <GlobalStyle />
-  </>
+  </MainContainer>
 );

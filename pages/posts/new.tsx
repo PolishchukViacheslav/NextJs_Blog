@@ -5,12 +5,17 @@ import { useDispatch } from 'react-redux';
 import { setPosts } from '../../src/redux/reducer';
 import { POST_URL } from '../../src/API/config';
 import { Layout } from '../../src/components/Layout';
-import { AddPostButton } from '../../src/components/styles';
+import {
+  AddPostButton,
+  AddNewPostForm,
+  FormTypingPartWrapper,
+  EmptyPostMessage,
+} from '../../src/components/styles';
 
 const NewPost: FC = () => {
-  const [title, addTitle] = useState<string>('');
-  const [body, addBody] = useState<string>('');
-  const [isEmpty, addIsEmpty] = useState<boolean>(false);
+  const [title, addTitle] = useState('');
+  const [body, addBody] = useState('');
+  const [isEmpty, addIsEmpty] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -46,9 +51,9 @@ const NewPost: FC = () => {
   };
   return (
     <Layout>
-      <form onSubmit={handleSubmit}>
-        {isEmpty && <span>Enter some data</span>}
-        <div>
+      <AddNewPostForm onSubmit={handleSubmit}>
+        {isEmpty && <EmptyPostMessage>Enter some data</EmptyPostMessage>}
+        <FormTypingPartWrapper>
           <label htmlFor="title">
             <div>Title:</div>
             <input
@@ -63,12 +68,14 @@ const NewPost: FC = () => {
             <textarea
               value={body}
               onChange={(e) => addBody(e.target.value.trimStart())}
-              placeholder="Post Title"
+              placeholder="start typing your thoughts here"
+              cols={50}
+              rows={7}
             />
           </label>
-        </div>
-        <AddPostButton type="submit">Add Post</AddPostButton>
-      </form>
+          <AddPostButton type="submit">Add Post</AddPostButton>
+        </FormTypingPartWrapper>
+      </AddNewPostForm>
     </Layout>
   );
 };

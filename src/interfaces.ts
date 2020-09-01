@@ -5,11 +5,11 @@ export interface SetPosts {
 
 export interface Post {
   id: number | string;
-  userId?: number;
+  // userId?: number;
   title: string;
   body: string;
-  createdAt?: string;
-  updatedAt?: string;
+  // createdAt?: string;
+  // updatedAt?: string;
 }
 
 export interface State {

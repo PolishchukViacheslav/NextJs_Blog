@@ -1,7 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
 import axios from 'axios';
-import styled from 'styled-components';
 import { Post, State } from '../src/interfaces';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
@@ -9,24 +8,7 @@ import { POST_URL } from '../src/API/config';
 import { Layout } from '../src/components/Layout';
 import { setPosts } from '../src/redux/reducer';
 import { wrapper } from '../src/redux/store';
-
-const Ul = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 0 25px;
-  list-style: none;
-`;
-
-const Li = styled.li`
-  padding: 10px;
-  margin: 10px;
-  width: max-content;
-  cursor: pointer;
-  border-radius: 25px;
-  background-color: #5963ec;
-  color: #fff;
-`;
+import { BlogList, Blog, BlogListTitle } from '../src/components/styles';
 
 const Home: NextPage = () => {
   const { posts } = useSelector<State, State>((state) => state);
@@ -34,7 +16,8 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout>
-        <Ul>
+        <BlogListTitle>Choose a blog to read from next titles:</BlogListTitle>
+        <BlogList>
           {posts.map((post) => (
             <Link
               key={post.id}
@@ -48,10 +31,10 @@ const Home: NextPage = () => {
               }}
               as={`/posts/${post.id}`}
             >
-              <Li>{post.title}</Li>
+              {post.title ? <Blog>{post.title}</Blog> : ''}
             </Link>
           ))}
-        </Ul>
+        </BlogList>
       </Layout>
       {/* <GlobalStyle /> */}
     </>
