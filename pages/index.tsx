@@ -6,9 +6,10 @@ import { Post, State } from '../src/interfaces';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { POST_URL } from '../src/API/config';
-import { Layout } from '../src/API/Layout';
+import { Layout } from '../src/components/Layout';
 import { setPosts } from '../src/redux/reducer';
 import { wrapper } from '../src/redux/store';
+import { GlobalStyle } from '../src/components/styles';
 
 const Ul = styled.ul`
   display: flex;
@@ -32,26 +33,29 @@ const Home: NextPage = () => {
   const { posts } = useSelector<State, State>((state) => state);
   console.log(posts);
   return (
-    <Layout>
-      <Ul>
-        {posts.map((post) => (
-          <Link
-            key={post.id}
-            href={{
-              pathname: '/posts/[id]',
-              query: {
-                title: post.title,
-                body: post.body,
-                idi: post.id,
-              },
-            }}
-            as={`/posts/${post.id}`}
-          >
-            <Li>{post.title}</Li>
-          </Link>
-        ))}
-      </Ul>
-    </Layout>
+    <>
+      <Layout>
+        <Ul>
+          {posts.map((post) => (
+            <Link
+              key={post.id}
+              href={{
+                pathname: '/posts/[id]',
+                query: {
+                  title: post.title,
+                  body: post.body,
+                  idi: post.id,
+                },
+              }}
+              as={`/posts/${post.id}`}
+            >
+              <Li>{post.title}</Li>
+            </Link>
+          ))}
+        </Ul>
+      </Layout>
+      {/* <GlobalStyle /> */}
+    </>
   );
 };
 

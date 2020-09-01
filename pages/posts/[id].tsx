@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { GetServerSideProps } from 'next';
-import { Layout } from '../../src/API/Layout';
+import { Layout } from '../../src/components/Layout';
 import { Post } from '../../src/interfaces';
 import { POST_URL } from '../../src/API/config';
 import axios from 'axios';

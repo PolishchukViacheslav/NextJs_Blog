@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setPosts } from '../../src/redux/reducer';
 import { POST_URL } from '../../src/API/config';
-import { Layout } from '../../src/API/Layout';
+import { Layout } from '../../src/components/Layout';
+import { AddPostButton } from '../../src/components/styles';
 
 const NewPost: FC = () => {
   const [title, addTitle] = useState<string>('');
@@ -66,7 +67,7 @@ const NewPost: FC = () => {
             />
           </label>
         </div>
-        <button type="submit">Add Post</button>
+        <AddPostButton type="submit">Add Post</AddPostButton>
       </form>
     </Layout>
   );

@@ -1,6 +1,7 @@
 import App, { AppInitialProps, AppContext } from 'next/app';
 import React from 'react';
 import { wrapper } from '../src/redux/store';
+import Head from 'next/head';
 
 class HomeApp extends App<AppInitialProps> {
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
@@ -15,7 +16,14 @@ class HomeApp extends App<AppInitialProps> {
   render() {
     const { Component, pageProps } = this.props;
 
-    return <Component {...pageProps} />;
+    return (
+      <>
+        <Head>
+          <title>NextJS Blog</title>
+        </Head>
+        <Component {...pageProps} />
+      </>
+    );
   }
 }
 
