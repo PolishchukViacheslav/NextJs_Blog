@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, SyntheticEvent } from 'react';
 import { v4 as idGenerator } from 'uuid';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setPosts } from '../../src/redux/reducer';
-import { POST_URL } from '../../src/API/config';
+import { URL } from '../../src/API/config';
 import { Layout } from '../../src/components/Layout';
 import {
   AddPostButton,
@@ -18,7 +18,7 @@ const NewPost: FC = () => {
   const [isEmpty, addIsEmpty] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
     const preTitle = title.trim();
@@ -36,7 +36,7 @@ const NewPost: FC = () => {
 
     dispatch(setPosts(post));
     axios
-      .post(POST_URL, post)
+      .post(URL, post)
       .then((res) => {
         `Result : ${res}`;
       })
@@ -54,18 +54,20 @@ const NewPost: FC = () => {
       <AddNewPostForm onSubmit={handleSubmit}>
         {isEmpty && <EmptyPostMessage>Enter some data</EmptyPostMessage>}
         <FormTypingPartWrapper>
-          <label htmlFor="title">
-            <div>Title:</div>
+          <label htmlFor="blog_title">
+            Title:
             <input
+              id="blog_title"
               type="text"
               value={title}
               onChange={(e) => addTitle(e.target.value.trimStart())}
               placeholder="Post Title"
             />
           </label>
-          <label htmlFor="title">
+          <label htmlFor="blog_body">
             <div>Body:</div>
             <textarea
+              id="blog_body"
               value={body}
               onChange={(e) => addBody(e.target.value.trimStart())}
               placeholder="start typing your thoughts here"

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Post, State } from '../src/interfaces';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-import { POST_URL } from '../src/API/config';
+import { URL } from '../src/API/config';
 import { Layout } from '../src/components/Layout';
 import { setPosts } from '../src/redux/reducer';
 import { wrapper } from '../src/redux/store';
@@ -36,13 +36,12 @@ const Home: NextPage = () => {
           ))}
         </BlogList>
       </Layout>
-      {/* <GlobalStyle /> */}
     </>
   );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
-  const { data } = await axios.get<Post[]>(POST_URL);
+  const { data } = await axios.get<Post[]>(URL);
 
   store.dispatch(setPosts(data));
 
