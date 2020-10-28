@@ -22,8 +22,8 @@ const PostWithID: FC<PostWithIdProps> = ({ post }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query: { id } }) => {
-  const { data } = await axios.get(URL + '/' + id);
-  const post = data;
+  const { data: post } = await axios.get(URL + '/' + id);
+
   return { props: { post } };
 };
 

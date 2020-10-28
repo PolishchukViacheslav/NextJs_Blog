@@ -12,7 +12,7 @@ import { BlogList, Blog, BlogListTitle } from '../src/components/styles';
 
 const Home: NextPage = () => {
   const { posts } = useSelector<State, State>((state) => state);
-  console.log(posts);
+
   return (
     <>
       <Layout>
